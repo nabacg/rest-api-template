@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>clj-stacktrace</groupId>
+  <artifactId>clj-stacktrace</artifactId>
+  <version>0.2.4</version>
+  <name>clj-stacktrace</name>
+  <description>More readable stacktraces in Clojure programs.</description>
+  <url>http://github.com/mmcgrana/clj-stacktrace</url>
+  <scm>
+    <connection>scm:git:git://github.com/mmcgrana/clj-stacktrace.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/mmcgrana/clj-stacktrace.git</developerConnection>
+    <tag>eafad37bd7196339a0be3f4d957c669e43d01ce6</tag>
+    <url>https://github.com/mmcgrana/clj-stacktrace</url>
+  </scm>
+  <build>
+    <sourceDirectory>src</sourceDirectory>
+    <testSourceDirectory>test</testSourceDirectory>
+    <resources>
+      <resource>
+        <directory>resources</directory>
+      </resource>
+    </resources>
+    <testResources>
+      <testResource>
+        <directory>test-resources</directory>
+      </testResource>
+    </testResources>
+  </build>
+  <repositories>
+    <repository>
+      <id>central</id>
+      <url>http://repo1.maven.org/maven2</url>
+    </repository>
+    <repository>
+      <id>clojars</id>
+      <url>http://clojars.org/repo/</url>
+    </repository>
+  </repositories>
+  <dependencies>
+    <dependency>
+      <groupId>org.clojure</groupId>
+      <artifactId>clojure</artifactId>
+      <version>1.2.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>lein-clojars</groupId>
+      <artifactId>lein-clojars</artifactId>
+      <version>0.6.0</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>

@@ -1,0 +1,1 @@
+web: java $JVM_OPTS -cp target/rest-api-starter.jar clojure.main -m rest-api-starter.core $PORT
