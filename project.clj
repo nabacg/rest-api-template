@@ -13,4 +13,5 @@
                                                  [ring/ring-core]]]]
   :uberjar-name "rest-api-starter.jar"
   :local-repo "lib"
+  :min-lein-version "2.0.0"
   :main rest-api-starter.core)
