@@ -16,14 +16,18 @@
                :jobs [:name "Jobs" :email "jobs@apple.com"]}))
 
 ;to start mongodb run below line in terminal
-;:~/DEV/mondodb/mongodb-linux-x86_64-2.4.9$ ./bin/mongod --dbpath ~/DEV/mondodb/data/
+;:~/DEV/mondodb/mongodb-linux-x86_64-2.4.9 ./bin/mongod --dbpath
+                                        ;~/DEV/mondodb/data/
 
+;; mongodb://rest-api-db-user:SubSecret@oceanic.mongohq.com:10095/app25545053
+(let [mongo-uri "mongodb://rest-api-db-user:SubSecret@oceanic.mongohq.com:10095/app25545053"
+      {:keys [conn db]} (mg/connect-via-uri mongo-uri)]
+  (def mongo-db db))
 ;(def mongo-db (mg/get-db "userdb"))
-;(mg/set-db! mongo-db)
-;(mc/insert-batch "entries" [{:_id "woz" :name "Steve Wozniak" :email "woz@apple.com"}
-;                            {:_id "jobs" :name "Jobs" :email
-;"jobs@apple.com"}
-;])
+(mg/set-db! mongo-db)
+(mc/insert-batch "entries" [{:_id "woz" :name "Steve Wozniak" :email "woz@apple.com"}
+                            {:_id "jobs" :name "Jobs" :email "jobs@apple.com"}
+])
 
 
 ;;(mc/remove "entries")

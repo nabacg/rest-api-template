@@ -8,7 +8,7 @@
                  [ring-server "0.2.8" :exclsions [[org.clojure/clojure]
                                                   [ring]]]
                  [ring/ring-json "0.2.0"]
-                 [com.novemberain/monger "1.7.0"]
+                 [com.novemberain/monger "2.0.0-rc1"]
                  [compojure "1.1.5" :exclusions [[org.clojure/clojure]
                                                  [ring/ring-core]]]]
   :uberjar-name "rest-api-starter.jar"
