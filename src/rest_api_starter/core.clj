@@ -32,7 +32,7 @@
       {:keys [conn db]} (mg/connect-via-uri mongo-uri)]
     (cmd db)))
 
-(connect-and-run mongo-conn-uri
+'(connect-and-run mongo-conn-uri
                  (fn [db] (mc/insert-batch db "entries" [{:_id "woz" :name "Steve Wozniak" :email "woz@apple.com"}
                             {:_id "jobs" :name "Jobs" :email "jobs@apple.com"}])))
 
