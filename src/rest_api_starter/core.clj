@@ -36,6 +36,7 @@
                  (fn [db] (mc/insert-batch db "entries" [{:_id "woz" :name "Steve Wozniak" :email "woz@apple.com"}
                             {:_id "jobs" :name "Jobs" :email "jobs@apple.com"}])))
 
+
 ;(def mongo-db (mg/get-db "userdb"))
 ;(mg/set-db! mongo-db)
 
