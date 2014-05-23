@@ -18,16 +18,25 @@
 ;to start mongodb run below line in terminal
 ;:~/DEV/mondodb/mongodb-linux-x86_64-2.4.9 ./bin/mongod --dbpath
                                         ;~/DEV/mondodb/data/
-
+(def mongo-conn-uri "mongodb://rest-api-db-user:SubSecret@oceanic.mongohq.com:10095/app25545053")
 ;; mongodb://rest-api-db-user:SubSecret@oceanic.mongohq.com:10095/app25545053
 (let [mongo-uri "mongodb://rest-api-db-user:SubSecret@oceanic.mongohq.com:10095/app25545053"
       {:keys [conn db]} (mg/connect-via-uri mongo-uri)]
-  (def mongo-db db))
+   (mc/insert-batch db "entries" [{:_id "woz" :name "Steve Wozniak" :email "woz@apple.com"}
+                            {:_id "jobs" :name "Jobs" :email "jobs@apple.com"}]))
+
+(defn connect-and-run [conn-uri cmd]
+  (let [mongo-uri conn-uri
+      {:keys [conn db]} (mg/connect-via-uri mongo-uri)]
+    (cmd db)))
+
+(connect-and-run mongo-conn-uri
+                 (fn [db] (mc/insert-batch db "entries" [{:_id "woz" :name "Steve Wozniak" :email "woz@apple.com"}
+                            {:_id "jobs" :name "Jobs" :email "jobs@apple.com"}])))
+
 ;(def mongo-db (mg/get-db "userdb"))
-(mg/set-db! mongo-db)
-(mc/insert-batch "entries" [{:_id "woz" :name "Steve Wozniak" :email "woz@apple.com"}
-                            {:_id "jobs" :name "Jobs" :email "jobs@apple.com"}
-])
+;(mg/set-db! mongo-db)
+
 
 
 ;;(mc/remove "entries")
@@ -40,11 +49,18 @@
  ;; (GET "/entry/:name" [name] (response (@db (keyword name))))
   
   (PUT "/entry" {{name :name email :email} :body}
-       (response (do
-                   (mc/insert "entries" {:_id email :name name :email email })
-                   (mc/find-maps "entries"))))
-  (GET "/entry/:name" [name] (response (mc/find-maps "entries" {:name name})))
-  (GET "/entries" [] (response (mc/find-maps "entries")))
+       (response
+        (connect-and-run mongo-conn-uri
+                         (fn [db] 
+                           (do
+                             (mc/insert db "entries" {:_id email :name name :email email })
+                             (mc/find-maps db "entries"))))))
+  (GET "/entry/:name" [name] (response
+                              (connect-and-run mongo-conn-uri
+                                               (fn [db] (mc/find-maps db
+                                                                     "entries" {:name name})))))
+  (GET "/entries" [] (response
+                      (connect-and-run mongo-conn-uri (fn [db]  (mc/find-maps db "entries")))))
   (GET "/ping" [] (response {:msg "PONG"}))
   (c-route/resources "/"))
 
