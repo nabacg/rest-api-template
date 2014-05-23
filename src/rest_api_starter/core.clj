@@ -20,10 +20,12 @@
                                         ;~/DEV/mondodb/data/
 (def mongo-conn-uri "mongodb://rest-api-db-user:SubSecret@oceanic.mongohq.com:10095/app25545053")
 ;; mongodb://rest-api-db-user:SubSecret@oceanic.mongohq.com:10095/app25545053
-(let [mongo-uri "mongodb://rest-api-db-user:SubSecret@oceanic.mongohq.com:10095/app25545053"
-      {:keys [conn db]} (mg/connect-via-uri mongo-uri)]
-   (mc/insert-batch db "entries" [{:_id "woz" :name "Steve Wozniak" :email "woz@apple.com"}
-                            {:_id "jobs" :name "Jobs" :email "jobs@apple.com"}]))
+;(let [mongo-uri "mongodb://rest-api-db-user:SubSecret@oceanic.mongohq.com:10095/app25545053"
+;      {:keys [conn db]} (mg/connect-via-uri mongo-uri)]
+; (mc/insert-batch db "entries" [{:_id "woz" :name "Steve Wozniak" :email "woz@apple.com"}
+;                               {:_id "jobs" :name "Jobs" :email
+;"jobs@apple.com"}
+;]))
 
 (defn connect-and-run [conn-uri cmd]
   (let [mongo-uri conn-uri
