@@ -50,11 +50,11 @@
   ;; (PUT "/entry" {{name :name :as user}  :body}  (response (swap! db assoc (keyword name) user)))
   ;; (GET "/entries" [] (response @db))
  ;; (GET "/entry/:name" [name] (response (@db (keyword name))))
-  
+
   (PUT "/entry" {{name :name email :email} :body}
        (response
         (connect-and-run mongo-conn-uri
-                         (fn [db] 
+                         (fn [db]
                            (do
                              (mc/insert db "entries" {:_id email :name name :email email })
                              (mc/find-maps db "entries"))))))
